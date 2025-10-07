@@ -15,4 +15,4 @@ const logUser = (fullName: string, birthday: Birthday, phone: Phone, address?: A
     console.log("Address:", address || "--");
 }
 
-logUser(fullName, birthday, phone, address)
+logUser(fullName, birthday, phone, address);
