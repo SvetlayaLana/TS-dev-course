@@ -7,17 +7,11 @@ import { isBefore, startOfDay } from "date-fns"
 const tasksSchema = z.array(schema)
 const parsedTasks: Task[] = tasksSchema.parse(rawData);
 
-let tasks: Task[] = parsedTasks.map(item => {
-    if (!item.priority) {
-        item.priority = DEFAULT_PRIORITY;
-    }
-
-    if (!item.status) {
-        item.status = DEFAULT_STATUS;
-    }
-
-    return item;
-})
+let tasks: Task[] = parsedTasks.map(item => ({
+    ...item,
+    priority: item.priority ?? DEFAULT_PRIORITY,
+    status: item.status ?? DEFAULT_STATUS,
+}))
 
 const getDetails = (id: number | string): Task | string => {
     return tasks.find(item => item.id === id) || "No details found.";
