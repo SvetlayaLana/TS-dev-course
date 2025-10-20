@@ -4,3 +4,4 @@
 // import "./lesson5";
 // import "./lesson5-practical-task"
 import "./lesson6";
+import "./lesson7";
