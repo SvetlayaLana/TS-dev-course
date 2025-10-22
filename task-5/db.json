@@ -1,0 +1,143 @@
+{
+  "tasks": [
+    {
+      "id": "0",
+      "title": "Look at the window",
+      "description": "Go to window and look",
+      "createdAt": "2025-10-05",
+      "status": "done",
+      "priority": "high",
+      "deadline": "2025-10-07"
+    },
+    {
+      "id": "1",
+      "title": "Eat sandwich",
+      "description": "Just eat",
+      "createdAt": "2025-10-06",
+      "status": "todo",
+      "priority": "low",
+      "deadline": "2025-10-22"
+    },
+    {
+      "id": "2",
+      "title": "Pet the cat",
+      "description": "You know what to do",
+      "createdAt": "2025-10-07",
+      "status": "done",
+      "priority": "low",
+      "deadline": "2025-10-11"
+    },
+    {
+      "id": "3",
+      "title": "Check out memes",
+      "createdAt": "2025-10-07",
+      "status": "done",
+      "priority": "medium",
+      "deadline": "2025-10-09"
+    },
+    {
+      "id": "4",
+      "title": "Call mom",
+      "createdAt": "2025-10-06",
+      "status": "todo",
+      "priority": "low",
+      "deadline": "2025-10-07"
+    },
+    {
+      "id": "5",
+      "title": "Go for a walk",
+      "description": "Wear your warm sweater and go to the park",
+      "createdAt": "2025-10-05",
+      "status": "done",
+      "priority": "low",
+      "deadline": "2025-10-09"
+    },
+    {
+      "id": "6",
+      "title": "Cook the diner",
+      "createdAt": "2025-10-06",
+      "status": "in_progress",
+      "priority": "low",
+      "deadline": "2025-10-07"
+    },
+    {
+      "id": "7",
+      "title": "Read the book",
+      "createdAt": "2025-10-07",
+      "status": "done",
+      "priority": "low",
+      "deadline": "2025-10-30"
+    },
+    {
+      "id": "8",
+      "title": "Play the Ghost of Tsushima",
+      "createdAt": "2025-10-07",
+      "status": "in_progress",
+      "priority": "low",
+      "deadline": "2025-10-20"
+    },
+    {
+      "id": "9",
+      "title": "Organize a party",
+      "description": "Call your friends, order goodies and have fun",
+      "createdAt": "2025-10-06",
+      "status": "todo",
+      "priority": "medium",
+      "deadline": "2025-11-01"
+    },
+    {
+      "id": "TlrKh1zqJ_7KnJAGDaIjb",
+      "title": "Do something",
+      "description": "",
+      "status": "todo",
+      "priority": "low",
+      "deadline": "2025-10-24",
+      "createdAt": "2025-10-22T13:53:03.410Z"
+    },
+    {
+      "id": "eVPoSnV6i8XWtoeGaNmyt",
+      "title": "Do something",
+      "description": "",
+      "status": "todo",
+      "priority": "low",
+      "deadline": "2025-10-24",
+      "createdAt": "2025-10-22T13:53:10.436Z"
+    },
+    {
+      "id": "iDJMGF3mjW8lMuzkAQJPW",
+      "title": "Do something",
+      "description": "",
+      "status": "todo",
+      "priority": "low",
+      "deadline": "2025-10-23",
+      "createdAt": "2025-10-22T13:56:37.942Z"
+    },
+    {
+      "id": "XJPND2yZyf1SXxx8CH38p",
+      "title": "Do more",
+      "description": "",
+      "status": "todo",
+      "priority": "high",
+      "deadline": "2025-10-24",
+      "createdAt": "2025-10-22T14:00:30.582Z"
+    },
+    {
+      "id": "QtSLgphEjkeX5aO3CK58t",
+      "title": "Pet the dog",
+      "description": "",
+      "status": "todo",
+      "priority": "medium",
+      "deadline": "2025-10-26",
+      "createdAt": "2025-10-25T11:28:31.476Z"
+    },
+    {
+      "id": "Xz9_0SF8K4KjUxBLh914F",
+      "title": "Write a poem",
+      "description": "",
+      "status": "todo",
+      "priority": "high",
+      "deadline": "2025-10-26",
+      "createdAt": "2025-10-25T11:30:10.947Z"
+    }
+  ]
+}
