@@ -1,25 +1,32 @@
-import { Task, Status, Priority } from "./task.types";
+import { Status, Priority } from "./task.types";
 import { isBefore, startOfDay } from "date-fns";
+import { Task } from "./models";
 
-function NonBlankStringCreate(target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
+function NonBlankString(target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
-    descriptor.value = function (task: Task){
-        if (!task.title) {
+    descriptor.value = function (...args: any[]){
+        const task = args.find(arg => arg && typeof arg === "object");
+
+        if ("title" in task && !task.title) {
             console.log("No blank strings allowed");
             return
         }
-        originalMethod.call(this, task);
+
+        originalMethod.apply(this, args);
     }
 }
 
-function NonBlankStringUpdate(target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
+function NonPastDeadlineDate(target: Object, propertyKey: string, descriptor: PropertyDescriptor) {
     const originalMethod = descriptor.value;
-    descriptor.value = function (id: string, task: Task){
-        if (!task.title) {
-            console.log("No blank strings allowed");
+    descriptor.value = function (...args: any[]){
+        const task = args.find(arg => arg && typeof arg === "object");
+
+        if ("deadline" in task && isBefore(startOfDay(new Date(task.deadline)), startOfDay(new Date()))) {
+            console.log("Deadline should not be in the past");
             return
         }
-        originalMethod.call(this, id, task);
+
+        originalMethod.apply(this, args);
     }
 }
 
@@ -40,7 +47,8 @@ export class TaskService {
         }
     }
 
-    @NonBlankStringCreate
+    @NonBlankString
+    @NonPastDeadlineDate
     addTask(newTask: Task) {
         const isIdExist = this.tasks.findIndex(item => item.id === newTask.id) > -1;
 
@@ -51,7 +59,8 @@ export class TaskService {
         }
     }
 
-    @NonBlankStringUpdate
+    @NonBlankString
+    @NonPastDeadlineDate
     updateTask(id: string, newTaskData: Partial<Task>) {
         const taskToUpdateIdx = this.tasks.findIndex(item => item.id === id);
 
