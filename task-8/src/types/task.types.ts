@@ -1,0 +1,29 @@
+export enum Status {
+  TODO = 'todo',
+  IN_PROGRESS = 'in_progress',
+  DONE = 'done',
+}
+
+export enum Priority {
+  LOW = 'low',
+  MEDIUM = 'medium',
+  HIGH = 'high',
+}
+
+export type Task = {
+  id: string;
+  title: string;
+  status: Status;
+  priority: Priority;
+  deadline: string | Date;
+  createdAt: string | Date;
+  description?: string;
+};
+
+export type TaskDTO = Omit<Task, 'id' | "createdAt">
+
+export type TaskFilters = {
+  status?: Status;
+  priority?: Priority;
+  createdAt?: Date | string;
+}
