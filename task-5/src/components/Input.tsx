@@ -1,11 +1,11 @@
-import type { FC, HTMLProps } from 'react';
+import type { HTMLProps } from 'react';
 import cn from 'classnames';
 
 type Props = HTMLProps<HTMLInputElement> & {
   error?: string;
 };
 
-export const Input: FC<Props> = ({ error, label, placeholder = 'Enter data...', ...props }) => {
+export const Input = ({ error, label, placeholder = 'Enter data...', ...props }: Props) => {
   return (
     <div className="flex flex-col gap-1">
       <label className="flex flex-col gap-1">

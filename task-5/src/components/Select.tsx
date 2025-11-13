@@ -1,4 +1,4 @@
-import type { FC, HTMLProps } from 'react';
+import type { HTMLProps } from 'react';
 import cn from 'classnames';
 
 type Props = HTMLProps<HTMLSelectElement> & {
@@ -6,7 +6,7 @@ type Props = HTMLProps<HTMLSelectElement> & {
   error?: string;
 };
 
-export const Select: FC<Props> = ({ error, label, options, ...props }) => {
+export const Select = ({ error, label, options, ...props }: Props) => {
   return (
     <div className="flex flex-col gap-1">
       <label className="flex flex-col gap-1">
@@ -18,7 +18,7 @@ export const Select: FC<Props> = ({ error, label, options, ...props }) => {
           })}
           {...props}
         >
-          <option key="default" value="">
+          <option selected disabled>
             Choose value...
           </option>
           {options.map((item) => (

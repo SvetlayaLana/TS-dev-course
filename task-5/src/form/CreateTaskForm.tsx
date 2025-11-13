@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import { useForm } from 'react-hook-form';
 import { createFormSchema, type CreateFormSchema } from './schema';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -7,12 +6,13 @@ import { addTask } from '../utils';
 import { Input, Select } from '../components';
 import { nanoid } from 'nanoid';
 
-export const CreateTaskForm: FC = () => {
+export const CreateTaskForm = () => {
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
     reset,
+    setError,
   } = useForm<CreateFormSchema>({
     defaultValues: {
       title: '',
@@ -26,12 +26,16 @@ export const CreateTaskForm: FC = () => {
   });
 
   const onSubmit = async (data: CreateFormSchema) => {
-    await addTask({
-      ...data,
-      id: nanoid(),
-      createdAt: new Date(),
-    });
-    reset();
+    try {
+      await addTask({
+        ...data,
+        id: nanoid(),
+        createdAt: new Date(),
+      });
+      reset();
+    } catch (err) {
+      setError('root', { message: 'Error during task creation' });
+    }
   };
 
   return (
@@ -83,6 +87,9 @@ export const CreateTaskForm: FC = () => {
       >
         Create
       </button>
+      {!!errors.root && (
+        <p className="bg-red-50 text-red-800 px-4 py-2 mt-2 rounded-lg">{errors.root.message}</p>
+      )}
     </form>
   );
 };

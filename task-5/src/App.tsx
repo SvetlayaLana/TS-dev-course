@@ -1,7 +1,6 @@
-import type { FC } from 'react';
 import { CreateTaskForm } from './form';
 
-const App: FC = () => {
+const App = () => {
   return <CreateTaskForm />;
 };
 
