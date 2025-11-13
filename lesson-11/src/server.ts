@@ -2,7 +2,9 @@ import express, { NextFunction, Request, Response } from 'express';
 import morgan from "morgan"
 import cors from "cors"
 import userRoutes from "./routes/users"
+import postRoutes from "./routes/posts"
 import AppError from './error';
+import "./config/database"
 
 const app = express();
 const PORT = 3000;
@@ -26,6 +28,7 @@ app.get('/', (req, res) => {
 })
 
 app.use("/users", userRoutes);
+app.use("/posts", postRoutes)
 
 app.use((err: AppError, req: Request, res: Response, next: NextFunction) => {
   console.error(err.message);

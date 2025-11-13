@@ -1,13 +1,13 @@
 import { NextFunction, Router, Request, Response } from 'express';
 import { z } from 'zod';
-import { createUser, getAllUsers } from '../controllers/users';
+import { createUser, deleteUser, getAllUsers, getUserDetails, updateUser } from '../controllers/users';
 import AppError from '../error';
 
 const router = Router();
 
 const queryParamSchema = z.object({
-  name: z.string().min(2),
-  age: z.string(),
+  name: z.string().min(2).optional(),
+  createdAt: z.string().optional(),
 })
 
 function validateQueryParams(req: Request, res: Response, next: NextFunction) {
@@ -26,7 +26,9 @@ router.use((req, res, next) => {
 })
 
 router.get('/', validateQueryParams, getAllUsers)
-
 router.post('/', createUser)
+router.put('/:id', updateUser)
+router.delete('/:id', deleteUser)
+router.get('/:id', getUserDetails)
 
 export default router;
