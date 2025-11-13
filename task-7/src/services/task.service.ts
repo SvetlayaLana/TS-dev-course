@@ -99,6 +99,12 @@ export const getTasks = (filters: TaskFilters)=> {
 }
 
 export const getTaskDetails = (id: string): Task | undefined => {
+  const task = tasks.find(item => item.id === id);
+
+  if (!task) {
+    throw new NotFoundError("Task");
+  }
+
   return tasks.find(item => item.id === id)
 }
 
@@ -137,7 +143,7 @@ export const deleteTask = (id: string)=> {
 
   if (taskIdx === -1) {
     throw new NotFoundError("Task");
-  } else {
-    tasks.splice(taskIdx, 1);
   }
+
+  tasks.splice(taskIdx, 1);
 }

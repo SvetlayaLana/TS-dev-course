@@ -3,6 +3,7 @@ import morgan from 'morgan';
 import cors from "cors";
 import taskRoutes from './routes/task.routes';
 import AppError from './error';
+import "./config/database"
 
 const app = express();
 const PORT = 3000;

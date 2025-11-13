@@ -35,7 +35,8 @@ function validateQueryParams(req: Request, res: Response, next: NextFunction) {
 
 function validateRequestBody(req: Request, res: Response, next: NextFunction) {
   try {
-    requestBodySchema.parse(req.body);
+    const schema = req.method === "POST" ? requestBodySchema : requestBodySchema.partial();
+    schema.parse(req.body);
     next()
   } catch (error) {
     if (error instanceof z.ZodError) {

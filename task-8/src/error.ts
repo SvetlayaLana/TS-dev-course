@@ -7,11 +7,11 @@ class AppError extends Error {
   }
 }
 
-export class NotFoundError extends Error {
+export class NotFoundError extends AppError {
   name: string = "NotFoundError";
 
   constructor(entity = "Resource") {
-    super(`${entity} not found`);
+    super(`${entity} not found`, 404);
   }
 }
 

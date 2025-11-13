@@ -10,20 +10,16 @@ export enum Priority {
   HIGH = 'high',
 }
 
-export type Task = {
-  id: string;
+export type TaskDTO = {
   title: string;
+  description?: string;
   status: Status;
   priority: Priority;
-  deadline: string | Date;
-  createdAt: string | Date;
-  description?: string;
-};
-
-export type TaskDTO = Omit<Task, 'id' | "createdAt">
+  deadline: string;
+}
 
 export type TaskFilters = {
   status?: Status;
   priority?: Priority;
-  createdAt?: Date | string;
+  createdAt?: string;
 }
