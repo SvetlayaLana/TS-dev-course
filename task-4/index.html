@@ -4,18 +4,22 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="only light" />
     <title>task-4</title>
   </head>
   <body>
     <div id="app" class="max-w-[70%] w-full mx-auto my-8">
-      <ul id="tasks-list" class="grid grid-cols-2 gap-4 mb-6"></ul>
+      <ul id="tasks-list" class="grid grid-cols-2 gap-4 mb-6">
+        <p id="error" class="bg-red-50 text-red-800 w-fit rounded-lg px-4 py-2 hidden"></p>
+      </ul>
 
       <form id="form" class="p-4 border border-gray-50 rounded-lg shadow-lg">
         <p class="font-bold text-lg mb-6">Create new task</p>
         <fieldset class="grid grid-cols-2 gap-4">
           <label class="flex flex-col gap-1">
             <span class="font-semibold text-xs">Title</span>
-            <input name="title" placeholder="Enter title..." required class="p-2 border border-gray-200 outline-none rounded-lg placeholder:text-gray-400" />
+            <input name="title" placeholder="Enter title..." class="p-2 border border-gray-200 outline-none rounded-lg placeholder:text-gray-400" />
+            <p id="title-error" class="text-red-800 w-fit mt-1 hidden"></p>
           </label>
           <label class="flex flex-col gap-1">
             <span class="font-semibold text-xs">Description</span>
@@ -39,10 +43,12 @@
           </label>
           <label class="flex flex-col gap-1">
             <span class="font-semibold text-xs">Deadline</span>
-            <input name="deadline" type="date" required class="p-2 border border-gray-200 outline-none rounded-lg placeholder:text-gray-400" />
+            <input name="deadline" type="date" class="p-2 border border-gray-200 outline-none rounded-lg placeholder:text-gray-400" />
+            <p id="deadline-error" class="text-red-800 w-fit mt-1 hidden"></p>
           </label>
         </fieldset>
         <button type="submit" class="w-full p-4 shadow-sm bg-sky-50 hover:bg-sky-50 hover:inset-shadow-sm rounded-lg cursor-pointer mt-6 uppercase font-semibold">Create</button>
+        <p id="form-error" class="bg-red-50 text-red-800 w-fit rounded-lg px-4 py-2 mt-2 hidden"></p>
       </form>
     </div>
     <script type="module" src="/src/main.ts"></script>

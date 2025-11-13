@@ -1,4 +1,5 @@
-import type {Task} from "./types";
+import type { Task, TaskDTO } from './types';
+import { nanoid } from 'nanoid';
 
 export const getAllTasks = async (): Promise<Task[]> => {
     const response = await fetch("http://localhost:3000/tasks")
@@ -10,14 +11,18 @@ export const getTaskById = async (id: string): Promise<Task> => {
     return await response.json()
 }
 
-export const addTask = async (newTask: Task): Promise<void> => {
+export const addTask = async (newTask: TaskDTO): Promise<void> => {
    await fetch("http://localhost:3000/tasks", {
        method: "POST",
-       body: JSON.stringify(newTask)
+       body: JSON.stringify({
+           newTask,
+           id: nanoid(),
+           createdAt: new Date()
+       })
    })
 }
 
-export const updateTask = async (id: string, newTaskData: Partial<Omit<Task | "id", "createdAt">>): Promise<void> => {
+export const updateTask = async (id: string, newTaskData: Partial<TaskDTO>): Promise<void> => {
     await fetch(`http://localhost:3000/tasks/${id}`, {
         method: "PATCH",
         body: JSON.stringify(newTaskData)

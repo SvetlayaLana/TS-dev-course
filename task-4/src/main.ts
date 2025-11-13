@@ -1,7 +1,39 @@
 import './style.css'
 import { addTask, getAllTasks } from "./api"
-import { type Task } from "./types";
-import { nanoid } from "nanoid";
+import { type Task, type TaskDTO } from './types';
+import { isBefore, startOfDay } from 'date-fns';
+
+const showErrorMessage = (id: string, message: string) => {
+    const errorBlock = document.querySelector<HTMLParagraphElement>(`#${id}`)!;
+    errorBlock.className = errorBlock.className.replace("hidden", "block")
+    errorBlock.innerHTML = message
+}
+
+const validate = (task: TaskDTO): boolean => {
+    hideErrorMessage("title-error")
+    hideErrorMessage("deadline-error")
+
+    if (!task.title) {
+        showErrorMessage("title-error", "Title is required");
+        return false;
+    }
+    if (!task.deadline) {
+        showErrorMessage("deadline-error", "Deadline is required");
+        return false;
+    }
+    if (isBefore(startOfDay(new Date(task.deadline)), startOfDay(new Date()))) {
+        showErrorMessage("deadline-error", "Deadline should not be in the past");
+        return false;
+    }
+
+    return true;
+}
+
+const hideErrorMessage = (id: string) => {
+    const errorBlock = document.querySelector<HTMLParagraphElement>(`#${id}`)!;
+    errorBlock.innerHTML = ""
+    errorBlock.className = errorBlock.className.replace("block", "hidden")
+}
 
 const displayTasks = (tasks: Task[]) => {
     const list = document.querySelector<HTMLUListElement>('#tasks-list')
@@ -39,39 +71,40 @@ const displayTasks = (tasks: Task[]) => {
 
 const getTasksList = async () => {
     try {
+        hideErrorMessage("error")
+
         const data = await getAllTasks();
         displayTasks(data)
     } catch (error) {
-        console.log("Error getting tasks list")
+        showErrorMessage("error", "Error getting tasks list")
     }
 }
 
 
-const onSubmit = async (data: Task): Promise<void> => {
-    try {
-        await addTask(data)
-        await getTasksList()
-    } catch (error) {
-        console.log("Error creating task")
-    }
-
+const onSubmit = async (data: TaskDTO): Promise<void> => {
+    await addTask(data)
+    await getTasksList()
 }
 
 const form = document.querySelector<HTMLFormElement>('#form')!
 
-form.addEventListener('submit', (e) => {
-    e.preventDefault();
+form.addEventListener('submit', async (e) => {
+    try {
+        e.preventDefault();
+        hideErrorMessage("form-error")
 
-    const formData = new FormData(form);
-    const task = Object.fromEntries(formData.entries()) as unknown as Omit<Task, "id" | "createdAt"> ;
+        const formData = new FormData(form);
+        const task = Object.fromEntries(formData.entries()) as TaskDTO;
+        const isValid = validate(task);
 
-    onSubmit({
-        ...task,
-        id: nanoid(),
-        createdAt: new Date()
-    })
+        if (!isValid) return
 
-    form.reset()
+        await onSubmit(task)
+
+        form.reset()
+    } catch (error) {
+        showErrorMessage("form-error", "Error creating task")
+    }
 })
 
 getTasksList();

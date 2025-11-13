@@ -19,3 +19,5 @@ export type Task = {
     deadline: string | Date;
     createdAt: string | Date;
 }
+
+export type TaskDTO = Omit<Task, "id" | "createdAt">;
